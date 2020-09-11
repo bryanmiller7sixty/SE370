@@ -1,5 +1,627 @@
-public class TicTacToe{
+/*Bryan Miller
+ *Module 14
+ *Goal: Create tic tac toe program that will cover if X wins, O wins, or stalemate
+ *Algorihtim:
+ *****************************************************************************************
+ *Create main panel and add north panel south panel to main,
+ *Create another grid layout of size(3,3) to south panel.
+ *Additionally add buttons to each 3X3 grid panel
+ *Add action listeners to every panel
+ *In action performed method, create boolean condition to make sure X goes first followed by O
+ *Add X or O text to panel depending on turn
+ *Create stalemate condition if 9 boxes are filled and noone wins
+ ****************************************************************************************
+ */
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.awt.BorderLayout;
+import java.awt.*;
+import java.util.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 
- System.out.print("Hello team !! I just pushed this code");
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.EtchedBorder;
 
+public class TicTacToe extends JFrame implements ActionListener{
+	 private static final int WIDTH = 600;
+  	private static final int HEIGHT = 600;
+	
+	JPanel northPanel = new JPanel() ;  
+	JPanel thirdPanel = new JPanel() ;
+	JPanel fourthPanel = new JPanel();
+	JPanel fifthPanel = new JPanel();
+	JPanel sixthPanel = new JPanel();
+	JPanel seventhPanel = new JPanel();
+	JPanel eighthPanel = new JPanel();
+	JPanel ninthPanel = new JPanel();
+	JPanel tenthPanel = new JPanel();
+	JPanel eleventhPanel = new JPanel();
+
+	
+	JLabel titleLabel = new JLabel("Tic Tac Toe") ;
+	
+	JButton bOne = new JButton("1"); 
+	JButton bTwo = new JButton("2");
+	JButton bThree = new JButton("3");
+	JButton bFour = new JButton("4");
+	JButton bFive = new JButton("5");
+	JButton bSix = new JButton("6");
+	JButton bSeven = new JButton("7");
+	JButton bEight = new JButton("8");
+	JButton bNine = new JButton("9");
+	
+	//check if contains values
+	int boxCount = 0;
+	String xValues;
+	String yValues;
+	int x = 1;
+	ArrayList<Integer> xList = new ArrayList<Integer>(5);
+	ArrayList<Integer> yList = new ArrayList<Integer>(5);
+	
+	public TicTacToe(){
+	Border beveledBorder = BorderFactory.createRaisedBevelBorder();
+     setBackground(Color.WHITE); 
+     setSize(WIDTH, HEIGHT) ;
+     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;  
+     setLocationRelativeTo(null) ;
+     //setLayout(new GridLayout(1,1)) ;	
+     
+     titleLabel.setFont(new Font("Century", Font.PLAIN, 65));
+     
+     JPanel mainPanel = new JPanel();
+     mainPanel.setLayout(new BorderLayout());
+     add(mainPanel);
+     
+     
+   	mainPanel.add(northPanel, BorderLayout.NORTH);
+   	northPanel.setPreferredSize(new Dimension(60, 120));
+   	northPanel.add(titleLabel);
+   	
+ 
+  	JPanel southPanel = new JPanel() ;
+  	mainPanel.add(southPanel, BorderLayout.CENTER);
+  	southPanel.setLayout(new GridLayout(3,3));
+  	
+  	southPanel.add(thirdPanel);
+  	thirdPanel.setBorder(beveledBorder);
+  	thirdPanel.setPreferredSize(new Dimension(50,50));
+  	thirdPanel.add(bOne);
+  	bOne.addActionListener(this);
+  	bOne.setPreferredSize(new Dimension(150, 10));
+  	
+  	
+  	southPanel.add(fourthPanel);
+  	fourthPanel.setBorder(beveledBorder);
+  	fourthPanel.setPreferredSize(new Dimension(50,50));
+  	fourthPanel.add(bTwo);
+  	bTwo.setPreferredSize(new Dimension(150, 10));
+  	bTwo.addActionListener(this);
+  	
+  
+  	southPanel.add(fifthPanel);
+  	fifthPanel.setBorder(beveledBorder);
+  	fifthPanel.setPreferredSize(new Dimension(50,50));
+  	bThree.setPreferredSize(new Dimension(150, 10));
+  	bThree.addActionListener(this);
+  	fifthPanel.add(bThree);
+  
+  	 
+  	southPanel.add(sixthPanel);
+  	sixthPanel.setBorder(beveledBorder);
+  	sixthPanel.setPreferredSize(new Dimension(50,50));
+  	bFour.setPreferredSize(new Dimension(150, 10));
+  	bFour.addActionListener(this);
+  	sixthPanel.add(bFour);
+  	
+  	
+  	
+  	southPanel.add(seventhPanel);
+  	seventhPanel.setBorder(beveledBorder);
+  	seventhPanel.setPreferredSize(new Dimension(50,50));
+  	bFive.setPreferredSize(new Dimension(150, 10));
+  	bFive.addActionListener(this);
+  	seventhPanel.add(bFive);
+  	
+  	
+  	southPanel.add(eighthPanel);
+  	eighthPanel.setBorder(beveledBorder);
+  	eighthPanel.setPreferredSize(new Dimension(50,50));
+  	bSix.setPreferredSize(new Dimension(150, 10));
+  	bSix.addActionListener(this);
+  	eighthPanel.add(bSix);
+  	
+  
+  	southPanel.add(ninthPanel);
+  	ninthPanel.setBorder(beveledBorder);
+  	ninthPanel.setPreferredSize(new Dimension(50,50));
+  	bSeven.setPreferredSize(new Dimension(150, 10));
+  	bSeven.addActionListener(this);
+  	ninthPanel.add(bSeven);
+  	
+   
+  	southPanel.add(tenthPanel);
+  	tenthPanel.setBorder(beveledBorder);
+  	tenthPanel.setPreferredSize(new Dimension(50,50));
+  	bEight.setPreferredSize(new Dimension(150, 10));
+  	bEight.addActionListener(this);
+  	tenthPanel.add(bEight);
+  	
+  ; 
+  	southPanel.add(eleventhPanel);
+  	eleventhPanel.setBorder(beveledBorder);
+  	eleventhPanel.setPreferredSize(new Dimension(50,50));
+  	bNine.setPreferredSize(new Dimension(150, 10));
+  	bNine.addActionListener(this);
+  	eleventhPanel.add(bNine);
+  
+  	northPanel.setBackground(Color.GRAY);
+  	southPanel.setBackground(Color.BLACK);
+  	
+  		
+
+	}public void actionPerformed(ActionEvent e) {
+		boolean value = true;
+		if(x % 2 == 1){
+			value = true;
+			x++;
+		}
+		else if(x % 2 == 0){
+			value = false;
+			x--;
+		}
+
+		String actionCommand = e.getActionCommand();
+		if(actionCommand.equals("1") && value == true){
+				titleLabel.setText("O's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("X");
+				thirdPanel.setLayout(new FlowLayout()); 
+				thirdPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		xList.add(1);
+        		boxCount++;
+				repaint();
+
+		}
+		if(actionCommand.equals("1") && value == false){
+				titleLabel.setText("X's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("O");
+				thirdPanel.setLayout(new FlowLayout()); 
+				thirdPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		//revalidate();
+        		yList.add(1);
+        		boxCount++;
+				repaint();
+		}
+		if(actionCommand.equals("2") && value == true){
+				titleLabel.setText("O's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("X");
+				fourthPanel.setLayout(new FlowLayout()); 
+				fourthPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+				xList.add(2);
+        		boxCount++;
+				repaint();
+
+		}
+		if(actionCommand.equals("2") && value == false){
+				titleLabel.setText("X's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("O");
+				fourthPanel.setLayout(new FlowLayout()); 
+				fourthPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		//revalidate();
+        		yList.add(2);
+        		boxCount++;
+				repaint();
+		}if(actionCommand.equals("3") && value == true){
+				titleLabel.setText("O's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("X");
+				fifthPanel.setLayout(new FlowLayout()); 
+				fifthPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		boxCount++;
+        		xList.add(3);
+				repaint();
+
+		}
+		if(actionCommand.equals("3") && value == false){
+				titleLabel.setText("X's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("O");
+				fifthPanel.setLayout(new FlowLayout()); 
+				fifthPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		//revalidate();
+				yList.add(3);
+        		boxCount++;
+				repaint();
+		}if(actionCommand.equals("4") && value == true){
+				titleLabel.setText("O's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("X");
+				sixthPanel.setLayout(new FlowLayout()); 
+				sixthPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		xList.add(4);
+        		boxCount++;
+				repaint();
+
+		}
+		if(actionCommand.equals("4") && value == false){
+				titleLabel.setText("X's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("O");
+				sixthPanel.setLayout(new FlowLayout()); 
+				sixthPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		//revalidate();
+        		yList.add(4);
+        		boxCount++;
+				repaint();
+		}
+		if(actionCommand.equals("5") && value == true){
+				titleLabel.setText("O's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("X");
+				seventhPanel.setLayout(new FlowLayout()); 
+				seventhPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		xList.add(5);
+        		boxCount++;
+				repaint();
+
+		}
+		if(actionCommand.equals("5") && value == false){
+				titleLabel.setText("X's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("O");
+				seventhPanel.setLayout(new FlowLayout()); 
+				seventhPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		//revalidate();
+        		yList.add(5);
+        		boxCount++;
+				repaint();
+		}if(actionCommand.equals("6") && value == true){
+				titleLabel.setText("O's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("X");
+				eighthPanel.setLayout(new FlowLayout()); 
+				eighthPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		xList.add(6);
+        		boxCount++;
+				repaint();
+
+		}
+		if(actionCommand.equals("6") && value == false){
+				titleLabel.setText("X's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("O");
+				eighthPanel.setLayout(new FlowLayout()); 
+				eighthPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		//revalidate();
+        		yList.add(6);
+        		boxCount++;
+				repaint();
+		}if(actionCommand.equals("7") && value == true){
+				titleLabel.setText("O's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("X");
+				ninthPanel.setLayout(new FlowLayout()); 
+				ninthPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		xList.add(7);
+        		boxCount++;
+				repaint();
+
+		}
+		if(actionCommand.equals("7") && value == false){
+				titleLabel.setText("X's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("O");
+				ninthPanel.setLayout(new FlowLayout()); 
+				ninthPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		//revalidate();
+        		yList.add(7);
+        		boxCount++;
+				repaint();
+		}if(actionCommand.equals("8") && value == true){
+				titleLabel.setText("O's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("X");
+				tenthPanel.setLayout(new FlowLayout()); 
+				tenthPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		xList.add(8);
+        		boxCount++;
+				repaint();
+
+		}
+		if(actionCommand.equals("8") && value == false){
+				titleLabel.setText("X's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("O");
+				tenthPanel.setLayout(new FlowLayout()); 
+				tenthPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		//revalidate();
+        		yList.add(8);
+        		boxCount++;
+				repaint();
+		}if(actionCommand.equals("9") && value == true){
+				titleLabel.setText("O's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("X");
+				eleventhPanel.setLayout(new FlowLayout()); 
+				eleventhPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		xList.add(9);
+        		boxCount++;
+				repaint();
+
+		}
+		if(actionCommand.equals("9") && value == false){
+				titleLabel.setText("X's turn");
+				northPanel.add(titleLabel);
+				JLabel labelOne = new JLabel("O");
+				eleventhPanel.setLayout(new FlowLayout()); 
+				eleventhPanel.add(labelOne);
+        		labelOne.setFont(new Font("Futura", Font.PLAIN,50));
+        		//revalidate();
+        		yList.add(9);
+        		boxCount++;
+				repaint();
+		}
+		if(boxCount == 9){
+			titleLabel.setText("STALEMATE!");
+			northPanel.setBackground(Color.green);
+					northPanel.add(titleLabel);
+		}
+		if(xList.contains(1)){
+			if(xList.contains(2)){
+				if(xList.contains(3)){
+					System.out.println("3");
+					titleLabel.setText("X won!");
+					northPanel.add(titleLabel);
+					
+					thirdPanel.setBackground(Color.green);
+					fourthPanel.setBackground(Color.green);
+					fifthPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}if(xList.contains(4)){
+			if(xList.contains(5)){
+				if(xList.contains(6)){
+					System.out.println("3");
+					titleLabel.setText("X won!");
+					northPanel.add(titleLabel);
+					
+					eighthPanel.setBackground(Color.green);
+					sixthPanel.setBackground(Color.green);
+					seventhPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}
+		if(xList.contains(7)){
+			if(xList.contains(8)){
+				if(xList.contains(9)){
+					System.out.println("3");
+					titleLabel.setText("X won!");
+					northPanel.add(titleLabel);
+					
+					tenthPanel.setBackground(Color.green);
+					eleventhPanel.setBackground(Color.green);
+					ninthPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}if(xList.contains(1)){
+			if(xList.contains(4)){
+				if(xList.contains(7)){
+					System.out.println("3");
+					titleLabel.setText("X won!");
+					northPanel.add(titleLabel);
+					
+					thirdPanel.setBackground(Color.green);
+					sixthPanel.setBackground(Color.green);
+					ninthPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}
+		if(xList.contains(2)){
+			if(xList.contains(5)){
+				if(xList.contains(8)){
+					System.out.println("3");
+					titleLabel.setText("X won!");
+					northPanel.add(titleLabel);
+					
+					fourthPanel.setBackground(Color.green);
+					seventhPanel.setBackground(Color.green);
+					tenthPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}
+		if(xList.contains(3)){
+			if(xList.contains(6)){
+				if(xList.contains(9)){
+					System.out.println("3");
+					titleLabel.setText("X won!");
+					northPanel.add(titleLabel);
+					
+					fifthPanel.setBackground(Color.green);
+					eighthPanel.setBackground(Color.green);
+					eleventhPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}
+		if(xList.contains(1)){
+			if(xList.contains(5)){
+				if(xList.contains(9)){
+					System.out.println("3");
+					titleLabel.setText("X won!");
+					northPanel.add(titleLabel);
+					
+					thirdPanel.setBackground(Color.green);
+					seventhPanel.setBackground(Color.green);
+					eleventhPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}if(xList.contains(3)){
+			if(xList.contains(5)){
+				if(xList.contains(7)){
+					System.out.println("3");
+					titleLabel.setText("X won!");
+					northPanel.add(titleLabel);
+					
+					fifthPanel.setBackground(Color.green);
+					ninthPanel.setBackground(Color.green);
+					seventhPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}if(yList.contains(1)){
+			if(yList.contains(2)){
+				if(xList.contains(3)){
+					System.out.println("3");
+					titleLabel.setText("O won!");
+					northPanel.add(titleLabel);
+					
+					thirdPanel.setBackground(Color.green);
+					fourthPanel.setBackground(Color.green);
+					fifthPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}if(yList.contains(4)){
+			if(yList.contains(5)){
+				if(yList.contains(6)){
+					System.out.println("3");
+					titleLabel.setText("O won!");
+					northPanel.add(titleLabel);
+					
+					eighthPanel.setBackground(Color.green);
+					sixthPanel.setBackground(Color.green);
+					seventhPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}
+		if(yList.contains(7)){
+			if(yList.contains(8)){
+				if(yList.contains(9)){
+					System.out.println("3");
+					titleLabel.setText("O won!");
+					northPanel.add(titleLabel);
+					
+					tenthPanel.setBackground(Color.green);
+					eleventhPanel.setBackground(Color.green);
+					ninthPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}if(yList.contains(1)){
+			if(yList.contains(4)){
+				if(yList.contains(7)){
+					System.out.println("3");
+					titleLabel.setText("O won!");
+					northPanel.add(titleLabel);
+					
+					thirdPanel.setBackground(Color.green);
+					sixthPanel.setBackground(Color.green);
+					ninthPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}
+		if(yList.contains(2)){
+			if(yList.contains(5)){
+				if(yList.contains(8)){
+					System.out.println("3");
+					titleLabel.setText("O won!");
+					northPanel.add(titleLabel);
+					
+					fourthPanel.setBackground(Color.green);
+					seventhPanel.setBackground(Color.green);
+					tenthPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}
+		if(yList.contains(3)){
+			if(yList.contains(6)){
+				if(yList.contains(9)){
+					System.out.println("3");
+					titleLabel.setText("O won!");
+					northPanel.add(titleLabel);
+					
+					fifthPanel.setBackground(Color.green);
+					eighthPanel.setBackground(Color.green);
+					eleventhPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}
+		if(yList.contains(1)){
+			if(yList.contains(5)){
+				if(yList.contains(9)){
+					System.out.println("3");
+					titleLabel.setText("O won!");
+					northPanel.add(titleLabel);
+					
+					thirdPanel.setBackground(Color.green);
+					seventhPanel.setBackground(Color.green);
+					eleventhPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}if(yList.contains(3)){
+			if(yList.contains(5)){
+				if(yList.contains(7)){
+					System.out.println("3");
+					titleLabel.setText("O won!");
+					northPanel.add(titleLabel);
+					
+					fifthPanel.setBackground(Color.green);
+					ninthPanel.setBackground(Color.green);
+					seventhPanel.setBackground(Color.green);
+					repaint();
+				}
+			}
+		}
+		
+		
+	}
+	public static void main(String args[]){
+		TicTacToe frame = new TicTacToe() ;
+    	frame.setVisible(true) ;
+	}
 }
