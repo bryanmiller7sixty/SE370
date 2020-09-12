@@ -625,9 +625,5 @@ public class TicTacToe extends JFrame implements ActionListener{
 		TicTacToe frame = new TicTacToe() ;
     	frame.setVisible(true) ;
 	}
-=======
- System.out.print("Hello team !! I just pushed this code");
-	cdffsdfsdfsd
->>>>>>> 30e0184b62556544a9db59cbfc14a7752afd38da
 }
 //done
