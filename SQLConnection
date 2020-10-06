@@ -1,0 +1,57 @@
+/*******************************************************************************************
+Author:  Bryan Miler
+Pre req- Set up database, schema in mySQL workbench
+Download java connector
+Set up jar file in external library (if in intelliJ, eclipse and other IDE's may be different)
+Goal: Request info via get from mySQL server display corresponding info
+******************************************************************************************/
+package Database;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args)throws Exception{
+        getConnection();
+        get();
+    }
+    public static ArrayList<String> get() throws Exception{
+        try{
+            Connection con = getConnection();
+            PreparedStatement statement = con.prepareStatement("SELECT name,company FROM data");
+            ResultSet result = statement.executeQuery();
+
+            ArrayList<String> array = new ArrayList<String>();
+            while ((result.next())){
+                System.out.print("Name: ");
+                System.out.print(result.getString("Name"));
+                System.out.print(", Company: ");
+                System.out.println(result.getString("Company"));
+                System.out.println();
+                //array.add(result.getString("Name"));
+            }
+            System.out.println("All records have been selected");
+            return array;
+        }catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    public static Connection getConnection() throws Exception{
+        try{
+            String driver = "com.mysql.jdbc.Driver";
+            String url = "jdbc:mysql://localhost:3306/d_app"; //server can be seen as local host followed by the name of the schema
+            String username = ""; //username goes here
+            String password = "*****"; //your password goes here
+            Connection connect = DriverManager.getConnection(url, username, password);
+            System.out.println("Connected!");
+            return connect;
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return null;
+    }
+}
+
