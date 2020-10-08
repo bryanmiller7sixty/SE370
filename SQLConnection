@@ -1,8 +1,7 @@
 /*******************************************************************************************
 Author:  Bryan Miler
-Pre req- Set up database, schema in mySQL workbench
-Download java connector
-Set up jar file in external library if in intelliJ directions for other IDE's are different.
+Pre-req: Set up database and schema in mySQL workbench. Download java connector.
+Set up jar file in external library if in intelliJ, directions for other IDE's are different.
 Goal: Request info via get from mySQL server display corresponding info
 ******************************************************************************************/
 package Database;
