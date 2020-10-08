@@ -1,6 +1,9 @@
 /*  SE 370 - Principles of Software Engineering
     Lab #3 Code - Team 4
     Names: Bryan Miller, Jonar Reyes, Jacob Valenzuela
+    Author: Bryan Miller
+    Disclamer: Card Image folder not attached (Github will upload each image as a file)
+    This is the basics of a card shuffling GUI with random optimization each time, this project is scalable with minor adjustments.
 */
 import java.awt.*;
 import java.awt.event.ActionListener ;
