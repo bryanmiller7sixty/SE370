@@ -1,3 +1,10 @@
+/**********************************************************************************
+SE 370 Principles of Software Engineering
+*********Using paint class create a random generated bars on click*****************
+Group: Bryan Miller, Jonar Reyes, Jacob Venezuela
+Authors: Bryan Miller, Jonar Reyes
+***********************************************************************************/
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
